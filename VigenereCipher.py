@@ -9,6 +9,12 @@ def __adjust_key(plain_text : str, key : str):
         for i in range(0, len(plain_text)):
             adjusted_key += key[i % len(key)].upper()
     return adjusted_key
+
+def __ord_ascii(character : chr) -> int:
+    return ord(character) - 65
+
+def __chr_ascii(integer: int) -> chr:
+    return chr(integer) + 65
 #endregion
 
 #region Public Methods
@@ -21,10 +27,9 @@ def encrypt_vigenere(plain_text : str, key : str) -> str:
     # start encrypting
     cipher_text = ""
     for i in range(0, len(plain_text)):
-        plain_text_char_as_int = ord(plain_text[i]) - 65
-        offset = ord(new_key[i]) - 65
-        cipher_text_char_as_int = (plain_text_char_as_int + offset) % alphabet_length + 65
-        cipher_text += chr(cipher_text_char_as_int)
+        plain_text_char_as_int = __ord_ascii(plain_text[i])
+        offset = __ord_ascii(new_key[i])
+        cipher_text += __chr_ascii((plain_text_char_as_int + offset) % alphabet_length)
     return cipher_text
 #endregion
 

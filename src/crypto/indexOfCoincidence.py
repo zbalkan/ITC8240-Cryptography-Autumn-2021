@@ -6,10 +6,10 @@ class IndexOfCoincidence:
     def __str__(self):
         return "Calculate Index of Coincidence."
     #region Public Methods
-    def calculate_index_of_coincidence(self, cipher_text : str) -> float:
-        dictionary = self.__populate_dictionary(cipher_text)
+    def calculate(self, text : str) -> float:
+        dictionary = self.__populate_dictionary(text)
         sum_of_chars = self.__calculate_sum(dictionary)
-        return sum_of_chars / (len(cipher_text) * (len(cipher_text) - 1))
+        return sum_of_chars / (len(text) * (len(text) - 1))
     #endregion
 
     #region Private Methods

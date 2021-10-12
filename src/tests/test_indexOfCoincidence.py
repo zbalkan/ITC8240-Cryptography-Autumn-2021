@@ -12,7 +12,7 @@ if __name__ == '__main__':
 class test_index_of_coincidence(unittest.TestCase):
     def test_encrypt_indexOfCoincidence(self):
         ioc = IndexOfCoincidence()
-        result = ioc.calculate_index_of_coincidence("EPYEPOPDZSZUFPO")
+        result = ioc.calculate("EPYEPOPDZSZUFPO")
         self.assertEqual(result, 0.08571428571428572) # Should be 0.08571428571428572
 
 if __name__ == '__main__':

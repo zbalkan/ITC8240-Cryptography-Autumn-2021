@@ -3,7 +3,7 @@ class TransmissionCipher:
         print("An instance of class TransmissionCipher is initiated.")
 
     def __str__(self):
-        return "Encrypt/decrypt text with Transmission Cipher."
+        return "Encrypt/decrypt text with Transmission (Permutation) Cipher."
 
     #region Public Methods
     def encrypt(self, plain_text:str, key: str, padding: str) -> str:

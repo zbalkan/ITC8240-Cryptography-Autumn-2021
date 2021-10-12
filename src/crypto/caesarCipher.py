@@ -4,7 +4,7 @@ class CaesarCipher:
         print("An instance of class CaesarCipher is initiated.")
 
     def __str__(self):
-        return "Encrypt/decrypt text with Caesar Cipher."
+        return "Encrypt/decrypt text with Caesar (Shift) Cipher."
 
     #region Public Methods
     def encrypt (self, plain_text: str, key: int) -> str:

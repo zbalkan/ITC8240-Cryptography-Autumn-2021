@@ -32,6 +32,27 @@ class AffineCipher:
             plain_text += self.__calculate_affine_decryption_with_decryption_key(x= cipher_text[index], a_inv= a_inv, b= b)
 
         return plain_text
+
+    def calculate_encryption_key(self, plain_text : str, cipher_text : str) -> str:
+        for a in range(1, 26, 1):
+            for b in range(1,26,1):
+                temp = self.encrypt(plain_text, a, b)
+                if(temp.lower() == cipher_text.lower()):
+                    encryption_key = ''.join([str(a), ' * (x + ', str(b),') mod 26'])
+                    break
+
+        return encryption_key
+
+    def calculate_decryption_key(self, plain_text : str, cipher_text : str) -> str:
+        for a in range(1, 26, 1):
+            for b in range(1,26,1):
+                temp = self.encrypt(plain_text, a, b)
+                if(temp.lower() == cipher_text.lower()):
+                    a_inv = self.__calculate_inverse_a(a= a)
+                    decryption_key = ''.join([str(a_inv), ' * (x + ', str(b),') mod 26'])
+                    break
+
+        return decryption_key
     #endregion
 
     #region Private Methods

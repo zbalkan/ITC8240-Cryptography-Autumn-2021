@@ -8,12 +8,14 @@ if __name__ == '__main__':
         from crypto.vigenereCipher import VigenereCipher
         from crypto.indexOfCoincidence import IndexOfCoincidence
         from crypto.affineCipher import AffineCipher
+        from crypto.oneTimePad import OneTimePad
     else:
         from .crypto.caesarCipher import CaesarCipher
         from .crypto.transmissionCipher import TransmissionCipher
         from .crypto.vigenereCipher import VigenereCipher
         from .crypto.indexOfCoincidence import IndexOfCoincidence
         from .crypto.affineCipher import AffineCipher
+        from .crypto.oneTimePad import OneTimePad
 
 #region Tasks
 def task_1(caesar : CaesarCipher, transmission : TransmissionCipher) -> None:
@@ -45,6 +47,14 @@ def task_3(affine : AffineCipher) -> None:
     print('1. Encryption key: ', affine.calculate_encryption_key(plain_text= plaintext, cipher_text= ciphertext))
     print('2. Decryption key: ', affine.calculate_decryption_key(plain_text= plaintext, cipher_text= ciphertext))
 
+def task_4(otp : OneTimePad) -> None:
+    key = otp.calculate_key(plain_text= 'DOUGH', cipher_text= '1000000110001010001000100')
+    binary_key = otp.encode_binary(plain_text= key)
+    cipher_text = otp.encrypt(plain_text= 'GLORY', binary_key= binary_key)
+
+    print('Task 4:')
+    print(cipher_text)
+
 #endregion
 
 def main():
@@ -53,10 +63,12 @@ def main():
     vigenere = VigenereCipher()
     ioc = IndexOfCoincidence()
     affine = AffineCipher()
+    otp = OneTimePad()
 
     task_1(caesar= caesar, transmission= transmission)
     task_2(vigenere= vigenere, ioc= ioc)
     task_3(affine= affine)
+    task_4(otp= otp)
 
 if __name__ == "__main__":
     main()

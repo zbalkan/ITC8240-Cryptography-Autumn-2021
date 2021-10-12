@@ -9,7 +9,7 @@ class OneTimePad:
     #region Public methods
     def encrypt(self, plain_text : str, binary_key : str) -> str:
         encoded_text = self.encode_binary(plain_text)
-        cipher_text = int(encoded_text, 2) ^ int(binary_key, 2)
+        cipher_text = self.__int_to_bin_fixed(int(encoded_text, 2) ^ int(binary_key, 2))
         return cipher_text
 
     def decrypt(self, cipher_text : str, binary_key : str) -> str:

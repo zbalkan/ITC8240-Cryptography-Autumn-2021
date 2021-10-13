@@ -2,10 +2,12 @@
 Python scripts for Cryptography class including basic ciphers and other calculations
 
 ### TODO
-[x] Use OOP for the library
+- [x] Use OOP for the library
 
-[x] Write unit tests for the classes
+- [x] Write unit tests for the classes
 
-[ ] Complete decrypt methods
+- [ ] Complete decrypt methods
 
-[ ] Add binary OTP
+- [x] Add binary OTP implementation
+
+- [x] Generate LaTeX by code

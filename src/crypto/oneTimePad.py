@@ -9,16 +9,26 @@ class OneTimePad:
     #region Public methods
     def encrypt(self, plain_text : str, binary_key : str) -> str:
         encoded_text = self.encode_binary(plain_text)
-        cipher_text = self.__int_to_bin_fixed(int(encoded_text, 2) ^ int(binary_key, 2))
+        # Bitwise XOR requires integers
+        # So, first convert each binary value to int, then  XOR them, then convert to binary again.
+        int_xor_result = int(encoded_text, 2) ^ int(binary_key, 2)
+        cipher_text = self.__int_to_bin_fixed(int_xor_result)
         return cipher_text
 
     def decrypt(self, cipher_text : str, binary_key : str) -> str:
+        # Bitwise XOR requires integers
+        # So, first convert each binary value to int, then  XOR them, then convert to binary again.
         int_xor_result = int(cipher_text, 2) ^ int(binary_key, 2)
         binary_xor_result = self.__int_to_bin_fixed(int_xor_result)
         plain_text = self.decode_binary(binary_xor_result)
         return plain_text
 
     def calculate_key(self, plain_text: str, cipher_text : str) -> str:
+        # 1. A xor A = 0
+        # 2. A xor 0 = A
+        # 3. Therefore; (A xor B) xor A = B xor (A xor A) = B xor 0 = B
+        # 4. [P]lain text xor [K]ey = [C]ipher text => P xor K = C
+        # 5. Therefore:   C xor P = P xor K xor P = K xor (P xor P) = K xor 0 = K
         int_xor_result = int(self.encode_binary(plain_text), 2) ^ int(cipher_text, 2)
         binary_xor_result = self.__int_to_bin_fixed(int_xor_result)
         binary_key = self.decode_binary(binary_xor_result)

@@ -1,6 +1,6 @@
 class TransmissionCipher:
     def __init__(self):
-        print("An instance of class TransmissionCipher is initiated.")
+        print("An instance of class ', type(self).__name__,' is initiated.")
 
     def __str__(self):
         return "Encrypt/decrypt text with Transmission (Permutation) Cipher."

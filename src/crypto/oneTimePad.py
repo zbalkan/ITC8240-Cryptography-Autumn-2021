@@ -1,7 +1,7 @@
 class OneTimePad:
 
     def __init__(self):
-        print('An instance of class ', type(self).__name__,' is initiated.')
+        print("An instance of class ", type(self).__name__, " is initiated.")
 
     def __str__(self):
         return "Encode/decode, encrypt/decrypt text with OneTimePad."

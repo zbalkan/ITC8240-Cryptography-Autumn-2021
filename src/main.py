@@ -17,7 +17,7 @@ if __name__ == '__main__':
         from .crypto.affineCipher import AffineCipher
         from .crypto.oneTimePad import OneTimePad
 
-from pylatex import Document, Section, Subsection, Math,PageStyle, Head, MiniPage, Foot, LargeText, MediumText, simple_page_number, LineBreak
+from pylatex import Document, Section, Subsection, Math, PageStyle, Head, MiniPage, Foot, LargeText, MediumText, FootnoteText, simple_page_number, LineBreak, Enumerate
 from pylatex.utils import italic, bold
 from datetime import date
 
@@ -36,6 +36,10 @@ def generate_latex(caesar : CaesarCipher, transmission : TransmissionCipher, vig
     # Create right header
     with header.create(Head("R")):
         header.append("Zafer BALKAN - 212289IVCM")
+
+    # Create right footer
+    with header.create(Foot("L")):
+        header.append( FootnoteText("https://github.com/zbalkan/ITC8240-Cryptography-Autumn-2021"))
 
     # Create right footer
     with header.create(Foot("R")):
@@ -80,23 +84,21 @@ def task_2(vigenere : VigenereCipher, ioc :IndexOfCoincidence, doc: Document) ->
     cipher_text = vigenere.encrypt(plain_text= plain_text, key= key)
 
     with doc.create(Subsection('Task 2')):
-        doc.append("1. Ciphertext: ")
-        doc.append(cipher_text)
-        doc.append("\n2. IoC of plain text: ")
-        doc.append(ioc.calculate(text= plain_text))
-        doc.append("\n3. IoC of cipher text: ")
-        doc.append(ioc.calculate(text= cipher_text))
+        with doc.create(Enumerate()) as enum:
+            enum.add_item("Ciphertext: " + cipher_text)
+            enum.add_item("IoC of plain text: " + str(ioc.calculate(text= plain_text)))
+            enum.add_item("IoC of cipher text: " + str(ioc.calculate(text= cipher_text)))
 
 def task_3(affine : AffineCipher, doc: Document) -> None:
     plain_text = 'SURFACE'
     cipher_text = 'NJCAXTP'
 
     with doc.create(Subsection('Task 3')):
-        doc.append("1. Encryption key: ")
-        doc.append(Math(data=[affine.calculate_encryption_key(plain_text= plain_text, cipher_text= cipher_text)]))
-        doc.append("\n2. Decryption key: ")
-        doc.append(Math(data=[affine.calculate_decryption_key(plain_text= plain_text, cipher_text= cipher_text)]))
-Math(data=['2*3', '=', 9])
+        with doc.create(Enumerate()) as enum:
+            enum.add_item("Encryption key: ")
+            doc.append(Math(data=[affine.calculate_encryption_key(plain_text= plain_text, cipher_text= cipher_text)]))
+            enum.add_item("Decryption key: ")
+            doc.append(Math(data=[affine.calculate_decryption_key(plain_text= plain_text, cipher_text= cipher_text)]))
 
 def task_4(otp : OneTimePad, doc: Document) -> None:
     key = otp.calculate_key(plain_text= 'DOUGH', cipher_text= '1000000110001010001000100')

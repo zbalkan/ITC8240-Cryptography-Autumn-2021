@@ -17,7 +17,7 @@ if __name__ == '__main__':
         from .crypto.affineCipher import AffineCipher
         from .crypto.oneTimePad import OneTimePad
 
-from pylatex import Document, Section, Subsection, Math, PageStyle, Head, MiniPage, Foot, LargeText, MediumText, FootnoteText, simple_page_number, LineBreak, Enumerate
+from pylatex import Document, Section, Subsection, Math, PageStyle, Head, MiniPage, Foot, LargeText, MediumText, FootnoteText, simple_page_number, LineBreak, Enumerate, Tabular, NoEscape
 from pylatex.utils import italic, bold
 from datetime import date
 
@@ -111,7 +111,22 @@ def task_4(otp : OneTimePad, doc: Document) -> None:
 
 def task_5(doc: Document) -> None:
     with doc.create(Subsection('Bonus Task:')):
-        doc.append("//TODO")
+        with doc.create(Tabular("l l | l")) as table:
+            table.add_row(("M","K","C"))
+            table.add_hline(0,2)
+            table.add_row(0,0,0)
+            table.add_row(0,1,0)
+            table.add_row(1,0,0)
+            table.add_row(1,1,1)
+
+        #PyLatex does not satisfy the needs to write the text below, so plain LaTeX text is used.
+        doc.append(NoEscape(
+            r"""
+            \( \implies  C_i = 1 \iff (M_i = 1 \land K_i = 1) \) (since K is used one time, it is ignored).\\
+            For \textit{n = length of plain text}; number of possible plain texts = \( 2^n \).\\
+            For \textit{x = number of 1's in cipher text}; number of possible plain texts = \( 2^{n - x} \).\\
+            Therefore; \( P(M=m|C=c) < P(M=m) \) . Meaning, the scheme \( c = m \land k \) does not satisfy the definition of perfect secrecy.
+            """))
 #endregion
 
 
